@@ -1152,13 +1152,18 @@ ul {
 
 .btn-sm {
     flex: 1;
-    padding: 10px;
-    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
     border: none;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: var(--transition);
+    text-align: center;
+    text-decoration: none;
 }
 
 .btn-dark {
@@ -1166,10 +1171,22 @@ ul {
     color: white;
 }
 
+.btn-dark:hover {
+    background: #333;
+    color: white;
+    transform: translateY(-2px);
+}
+
 .btn-light {
     background: white;
     border: 1px solid #eee;
     color: #111;
+}
+
+.btn-light:hover {
+    background: #f9f9f9;
+    color: #111;
+    transform: translateY(-2px);
 }
 
 /* Floating Elements */
@@ -1640,6 +1657,32 @@ ul {
     font-size: 1.5rem;
 }
 
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-dark {
+    background: #111;
+    color: white;
+}
+
+.btn-dark:hover {
+    background: #333;
+    color: white;
+}
+
+/* Reusing btn-light locally or just ensuring it works if defined elsewhere. 
+   If not defined, adding it here safely. */
+/* .btn-light is already defined in CTA section previously, so it should work. */
+
 .btn-black {
     background: #111;
     color: white;
@@ -1649,7 +1692,15 @@ ul {
     border: none;
     font-size: 0.8rem;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
+
+.btn-black:hover {
+    background: #333;
+}
+
+
 
 .success-stat {
     position: absolute;
@@ -1923,6 +1974,18 @@ ul {
     z-index: 1000;
     transition: all 0.3s ease;
     text-decoration: none;
+    overflow: hidden;
+    /* Ensure image stays in circle */
+    padding: 0;
+    /* Remove default padding if any */
+    border: 2px solid white;
+    /* Optional: adds a nice border */
+}
+
+.whatsapp-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .whatsapp-float:hover {
@@ -2031,5 +2094,98 @@ ul {
     .footer-links {
         flex-direction: column;
         gap: 30px;
+    }
+
+    /* Newsletter Mobile Optimization */
+    .newsletter-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .newsletter-text p {
+        margin: 0 auto 30px;
+        /* Center text */
+    }
+
+    .newsletter-form {
+        margin: 0 auto;
+        /* Center form */
+        flex-direction: column;
+        /* Stack input and button */
+    }
+
+    .newsletter-form input {
+        width: 100%;
+        text-align: center;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+    }
+
+    .newsletter-image {
+        order: -1;
+        /* Option: Put image on top if desired, or keep as is. Let's keep text first for CTA usually. */
+        /* Actually, usually images look good on top for sections. Let's try order -1. */
+        order: -1;
+    }
+
+    .newsletter-image img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        /* Prevent it from being too huge */
+        margin: 0 auto;
+    }
+
+    /* Features Section Mobile Optimization */
+    .features-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .features-text {
+        order: 2;
+        /* Text below image */
+    }
+
+    .features-list {
+        text-align: left;
+        /* Keep list aligned left for readability */
+        display: inline-block;
+        /* Center the list block itself */
+        margin-top: 20px;
+    }
+
+    .features-image {
+        order: 1;
+        /* Image on top */
+        margin: 0 auto;
+        /* Ensure specific height constraints if needed on mobile to avoid layout shifts, 
+           but usually width: 100% handles it. */
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .placeholder-image-girl {
+        /* Ensure container doesn't overflow */
+        width: 100%;
+        height: auto;
+    }
+
+    .placeholder-image-girl img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Adjust floating card position for mobile */
+    .card-transfer {
+        left: 50%;
+        transform: translateX(-50%) scale(0.9);
+        /* Center horizontally */
+        bottom: -20px;
+        white-space: nowrap;
     }
 }
