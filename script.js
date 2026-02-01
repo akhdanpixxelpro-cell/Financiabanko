@@ -56,21 +56,50 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.style.padding = '20px 0';
         }
     });
-    // ToC Toggle Logic
-    const tocToggle = document.querySelector('.toc-toggle');
+    // Dynamic TOC Logic
     const tocList = document.querySelector('.toc-list');
+    const articleBody = document.querySelector('.article-body');
+    const tocToggle = document.querySelector('.toc-toggle');
 
-    if (tocToggle && tocList) {
-        tocToggle.addEventListener('click', () => {
-            tocList.classList.toggle('active');
-            // Rotate icon or similar
-            const icon = tocToggle.querySelector('i');
-            if (tocList.classList.contains('active')) {
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                icon.style.transform = 'rotate(0deg)';
+    if (tocList && articleBody) {
+        // Clear existing static items if any (optional, but good for safety)
+        tocList.innerHTML = '';
+
+        const headers = articleBody.querySelectorAll('h2, h3');
+        headers.forEach((header, index) => {
+            // Generate ID if missing
+            if (!header.id) {
+                header.id = `section-${index}`;
             }
+
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${header.id}`;
+            a.textContent = header.textContent;
+
+            // Indent H3
+            if (header.tagName.toLowerCase() === 'h3') {
+                li.style.marginLeft = '20px';
+            }
+
+            li.appendChild(a);
+            tocList.appendChild(li);
         });
+
+        // Toggle Functionality
+        if (tocToggle) {
+            tocToggle.addEventListener('click', () => {
+                tocList.classList.toggle('active');
+                const icon = tocToggle.querySelector('i');
+                if (tocList.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        }
     }
 
     // Scroll to Top & WhatsApp Logic
